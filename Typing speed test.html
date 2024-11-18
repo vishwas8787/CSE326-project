@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Test-home</title>
+    <style>
+        *{
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 0%;
+        }
+        body{
+            background-color: rgba(243, 158, 0, 0.873);
+        }
+        #heading{
+            text-align: center;
+            margin-top: 30px;
+            font-size: 30px;
+            word-spacing: 5px;
+            letter-spacing: 4px;
+        }
+        #links{
+            background-color: rgb(36, 36, 36);
+            padding: 20px 0px;
+        }
+        a{
+            text-decoration: None;
+            color: white;
+            padding: 20px 30px;
+        }
+        a:hover{
+            background-color: rgb(46, 185, 46);
+            transition: 0.3s;
+            
+        }
+        #typing_test{
+            text-align: center;
+            font-size: 60px;
+            font-weight: bold;
+            margin-top: 15px;
+
+        }
+        #diff{
+            text-align: center;
+            margin-top: 70px;
+            font-size: 25px;
+        }
+        select{
+            background-color: rgba(255, 166, 0, 0.925);
+            width: 200px;
+            height: 50px;
+            border: 2px black solid;
+            border-radius: 5px;
+            font-size: 25px;
+        }
+        button{
+            background-color: rgba(50, 200, 50, 0.889);
+            color: white;
+            border-radius: 5px;
+            width: 200px;
+            height: 50px;
+            margin-top: 20px;
+            font-size: 40px;
+        }
+        button:hover{
+            background-color: rgb(31, 190, 31);
+        }
+        #text_box{
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 60px;
+            font-size: 22px;
+
+        }
+        input[type="text"]{
+            margin: 20px;
+            font-size: 22px;
+            padding: 15px;
+            border-radius: 7px;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="links">
+        <a href="Typing speed test.html">Home</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div id="heading">Typing Speed Test</div>
+    <div id="typing_test">Test your speed of typing</div>
+    
+    <div id="diff">
+        <label for="difficulty-select">Choose Difficulty:</label>
+        <select id="difficulty-select">
+            <option value="beginner" selected>Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+        </select><br>
+        <button onclick="startTest()">Start</button>
+        
+    </div>
+
+    <div id="text_box">
+        <div id="text_display"></div>
+        <input type="text" id="input_box" placeholder="Start typing here..." disabled oninput="checkTyping()">
+        <div id="results"></div>
+        <div id="timer">Time Remaining: 60 seconds</div>
+    </div>
+    <script>
+        let difficulty = "";
+        let dialogue = "";
+        let startTime = 0;
+        let endTime = 0;
+        let userInput = "";
+        let correctText = "";
+        let accuracy = 0;
+        let wpm = 0;
+        let timer;
+        let timeLeft = 60;
+
+        const dialogues = {
+            beginner: [
+                "The quick brown fox jumps over the lazy dog.",
+                "The sun was shining brightly in the clear blue sky.",
+                "The cat purred contentedly on my lap.",
+                "The dog ran quickly around the corner."
+            ],
+            intermediate: [
+                "Learning a new language opens up a world of opportunities and helps you connect with diverse cultures around the globe.",
+                "Reading books can take you on wonderful adventures to far-off places without ever leaving your home.",
+                "The universe is a vast and mysterious place, filled with countless stars, planets, and galaxies waiting to be explored.",
+                "Healthy eating habits and regular exercise can significantly improve your overall well-being and quality of life."
+            ],
+            advanced: [
+                "As technology continues to advance at an unprecedented pace, it is crucial for individuals to adapt and acquire new skills to remain relevant in the workforce.",
+                "The intricate balance of ecosystems is essential for maintaining biodiversity and supporting life on our planet, highlighting the importance of environmental conservation.",
+                "Quantum computing represents a groundbreaking shift in computational capabilities, promising to solve complex problems that are currently beyond the reach of traditional computers."
+            ]
+        };
+        function startTest() {
+            difficulty = document.getElementById("difficulty-select").value;
+            dialogue = getRandomDialogue(difficulty);
+            correctText = dialogue;
+            document.getElementById("text_display").innerHTML = dialogue;
+            document.getElementById("input_box").disabled = false;
+            document.getElementById("input_box").focus();
+            startTime = new Date().getTime();
+            timeLeft = 60;
+            document.getElementById("timer").innerHTML = `Time Remaining: ${timeLeft} seconds`;
+            timer = setInterval(updateTimer, 1000);
+        }
+        function getRandomDialogue(difficulty) {
+            return dialogues[difficulty][Math.floor(Math.random() * dialogues[difficulty].length)];
+        }
+        function checkTyping() {
+            userInput = document.getElementById("input_box").value;
+            if (userInput === correctText) {
+                endTest();
+            }
+        }
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById("timer").innerHTML = `Time Remaining: ${timeLeft} seconds`;
+            } else {
+                endTest();
+            }
+        }
+        function endTest() {
+            clearInterval(timer);
+            endTime = new Date().getTime();
+            calculateResults();
+        }
+        function calculateResults() {
+            let timeTaken = (endTime - startTime) / 1000;
+            let numWords = correctText.split(" ").length;
+            wpm = Math.round((numWords / timeTaken) * 60);
+            accuracy = Math.round((getAccuracy(userInput, correctText) * 100));
+            document.getElementById("results").innerHTML = `Your typing speed is ${wpm} words per minute, with an accuracy of ${accuracy}%.`;
+            document.getElementById("input_box").disabled = true;
+        }
+        function getAccuracy(userInput, correctText) {
+            let correctChars = 0;
+            for (let i = 0; i < userInput.length; i++) {
+                if (userInput[i] === correctText[i]) {
+                    correctChars++;
+                }
+            }
+            return correctChars / correctText.length;
+        }
+    </script>
+</body>
+</html>
