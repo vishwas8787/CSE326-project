@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Speed Test-about</title>
     <style>
-                *{
+        *{
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             margin: 0%;
         }
@@ -25,13 +25,13 @@
             padding: 20px 0px;
 
         }
-        a{
+        .links{
             text-decoration: None;
             color: white;
             padding: 20px 30px;
 
         }
-        a:hover{
+        .links:hover{
             background-color: rgb(46, 185, 46);
             transition: 0.3s;
         }
@@ -42,7 +42,7 @@
             color: white;
             padding: 25px;
             font-size: 25px;
-            border: 2px black solid;
+            box-shadow: 0px 0px 20px black;
             border-radius: 10px;
         }
         h1{
@@ -63,35 +63,42 @@
 
         #text2{
             grid-column-start: 4;
-            border: 2px black solid;
             margin: 50px 30px;
             background-color: rgb(79, 79, 79);
             color: white;
             padding: 25px;
             border-radius: 10px;
-            height: 150px;
-            
+            height: 190px;
+            box-shadow: 0px 0px 20px black;
         }
-        
-
+        .conlink{
+            text-decoration: none;
+            color: white;
+        }
+        .conlink:hover{
+            color: rgb(46, 185, 46);
+            transition: 0.2s;
+        }
 
     </style>
 </head>
 <body>
     <div id="links">
-        <a href="Typing speed test.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="Typing speed test.html" class="links">Home</a>
+        <a href="about.html" class="links">About</a>
     </div>
     <div class="gridcon">
         <div id="text1">Hi!<br><br> I am Vishwas Saini, a first year student of B.Tech CSE. I have made a typing speed test website as my project of CSE326 subject using HTML, CSS and JavaScript.<br><br>
         This website has multiple difficulties (beginner, intermediate, advanced) so you can select whichever difficulty you feel comfortable with. After selecting the difficulty you can start the test.<br><br>
         There is a 60s timer and you have to complete test within this time. If you do not complete test within 60s, the test will end automatically. If you complete the test within 60s then the test ends automatically and result will be shown.<br><br>
-        Once the test is done you will see your words per minute (WPM) and accuracy.
+        Once the test is done you will see your words per minute (WPM).
     </div>
 
         <div id="text2">
             <h1>Contact</h1>
-            <div id="email">Email: vishwassaini60@gmail.com</div>
+            <div id="email">Email: vishwassaini60@gmail.com<br><br>
+                <a href="https://www.linkedin.com/in/vishwas-saini-6658b1324/" target="_blank" class="conlink">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/vishwas-saini-6658b1324/" target="_blank" class="conlink">Github</a></div>
         </div>
     </div>
 
