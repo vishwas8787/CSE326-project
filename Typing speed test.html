@@ -54,7 +54,9 @@
             border: 2px black solid;
             border-radius: 5px;
             font-size: 25px;
-            color: black;
+            color: white;
+            background: transparent;
+            backdrop-filter: blur(10px);
         }
         button{
             background-color: rgba(50, 200, 50, 0.889);
@@ -78,13 +80,14 @@
             font-size: 22px;
         }
         input[type="text"]{
-            background-color: white;
             margin: 20px;
             font-size: 22px;
             padding: 15px;
             border-radius: 7px;
-            color: black;
+            color: white;
             width: 600px;
+            background: transparent;
+            backdrop-filter: blur(10px);
         }
 
     </style>
@@ -96,7 +99,7 @@
     </div>
 
     <div id="heading">Typing Speed Test</div>
-    <div id="typing_test">Test your speed of typing</div>
+    <div id="typing_test">Check your speed of typing</div>
     
     <div id="diff">
         <label for="difficulty-select">Choose Difficulty:</label>
@@ -133,7 +136,7 @@
                 "The cat purred contentedly on my lap.",
                 "The dog ran quickly around the corner."
             ],
-            intermediate: [
+            intermediate: [ 
                 "Learning a new language opens up a world of opportunities and helps you connect with diverse cultures around the globe.",
                 "Reading books can take you on wonderful adventures to far-off places without ever leaving your home.",
                 "The universe is a vast and mysterious place, filled with countless stars, planets, and galaxies waiting to be explored.",
@@ -151,6 +154,7 @@
             correctText = dialogue;
             document.getElementById("text_display").innerHTML = dialogue;
             document.getElementById("input_box").disabled = false;
+            document.getElementById("input_box").value=""
             document.getElementById("input_box").focus();
             startTime = new Date().getTime();
             timeLeft = 60;
@@ -183,7 +187,7 @@
             let timeTaken = (endTime - startTime) / 1000;
             let numWords = correctText.split(" ").length;
             wpm = Math.round((numWords / timeTaken) * 60);
-            document.getElementById("results").innerHTML = `Your typing speed is ${wpm} words per minute`;
+            document.getElementById("results").innerHTML = `Your typing speed is ${wpm} words per minute.`;
             document.getElementById("input_box").disabled = true;
         }
     </script>
