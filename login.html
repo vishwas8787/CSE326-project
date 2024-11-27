@@ -30,7 +30,7 @@
         margin-bottom: 15px;
         text-align: center;
     }
-    input[type="text"]{
+    .input{
         width: 350px;
         height: 40px;
         padding: 0px 15px;
@@ -41,22 +41,7 @@
         background-color: transparent;
         margin-bottom: 20px;
     }
-    input[type="text"]::placeholder{
-        color: white;
-    }
-
-    input[type="password"]{
-        width: 350px;
-        height: 40px;
-        padding: 0px 15px;
-        font-size: 17px;
-        color: white;
-        border: 1px white solid;
-        border-radius: 20px;
-        background-color: transparent;
-        margin-bottom: 20px;
-    }
-    input[type="password"]::placeholder{
+    .input::placeholder{
         color: white;
     }
     .text{
@@ -84,10 +69,10 @@
     <div id="login">
         <form action="">
             <h1>Login</h1>
-            <label for="usrn" class="text">Username</label><br>
-            <input type="text" name="usrn" id="usrn" placeholder="Enter Username"><br>
+            <label for="usrn" class="text" id>Username</label><br>
+            <input type="text" name="usrn" id="usrn" placeholder="Enter Username" class="input"><br>
             <label for="pw" class="text">Password</label><br>
-            <input type="password" name="pw" id="pw" placeholder="Enter password"><br>
+            <input type="password" name="pw" id="pw" placeholder="Enter password" class="input"><br>
             <label><input type="checkbox"> Remember Me</label><br>
             <a href="Typing speed test.html">Login</a>
         </form>
